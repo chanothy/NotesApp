@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.notesapp.databinding.FragmentNoteBinding
 import com.example.notesapp.databinding.FragmentTasksBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class NoteFragment : Fragment() {
     val TAG = "NoteFragment"
-    private var _binding: FragmentTasksBinding? = null
+    private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +38,7 @@ class NoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentTasksBinding.inflate(inflater, container, false)
+        _binding = FragmentNoteBinding.inflate(inflater, container, false)
         val view = binding.root
         val application = requireNotNull(this.activity).application
         val dao = TaskDatabase.getInstance(application).taskDao
@@ -46,10 +48,19 @@ class NoteFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-
-
+        var saveButton = binding.saveButton
+        saveButton.setOnClickListener {
+            viewModel.addTask()
+            val action = NoteFragmentDirections.actionNoteFragmentToTasksFragment()
+            this.findNavController().navigate(action)
+        }
         return view
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
