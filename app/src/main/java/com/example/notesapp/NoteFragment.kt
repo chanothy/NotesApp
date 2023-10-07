@@ -54,6 +54,8 @@ class NoteFragment : Fragment() {
             val action = NoteFragmentDirections.actionNoteFragmentToTasksFragment()
             this.findNavController().navigate(action)
         }
+
+
         return view
 
     }

@@ -5,7 +5,11 @@
     <data>
         <variable
             name="task"
-            type="com.example.notesapp.Task" />
+            type="com.example.notesapp.Task"
+            />
+        <variable
+            name="viewModel"
+            type="com.example.notesapp.EditTaskViewModel" />
     </data>
 
     <LinearLayout
@@ -18,14 +22,26 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/task_name"
+            <LinearLayout
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@{task.taskName}"
-                android:textSize="16sp" />
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/task_name"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@{task.taskName}"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/description_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.description}" />
+            </LinearLayout>
 
             <ImageButton
                 android:id="@+id/delete_button"

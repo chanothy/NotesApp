@@ -1,6 +1,7 @@
 package com.example.notesapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class EditTaskFragment : Fragment() {
             .get(EditTaskViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+
         viewModel.navigateToList.observe(viewLifecycleOwner, Observer { navigate ->
             if (navigate) {
                 view.findNavController()
@@ -43,6 +46,17 @@ class EditTaskFragment : Fragment() {
         })
         return view
     }
+
+//    fun yesPressed() {
+//        val taskId = EditTaskFragmentArgs.fromBundle(requireArguments()).taskId
+//        val application = requireNotNull(this.activity).application
+//        val dao = TaskDatabase.getInstance(application).taskDao
+//
+//        val viewModelFactory = EditTaskViewModelFactory(taskId, dao)
+//        val viewModel = ViewModelProvider(this, viewModelFactory)
+//            .get(EditTaskViewModel::class.java)
+//        viewModel.deleteTask()
+//    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

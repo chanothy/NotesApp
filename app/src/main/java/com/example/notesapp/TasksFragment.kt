@@ -39,6 +39,9 @@ class TasksFragment : Fragment()   {
 
         }*/
 
+
+
+
         val addNoteButton = binding.addNoteButton
         addNoteButton.setOnClickListener {
             val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
@@ -51,10 +54,16 @@ class TasksFragment : Fragment()   {
         }
         fun yesPressed(taskId : Long) {
             Log.d(TAG, "in yesPressed(): taskId = $taskId")
+            val application = requireNotNull(this.activity).application
+            val dao = TaskDatabase.getInstance(application).taskDao
+
+            val viewModelFactory = EditTaskViewModelFactory(taskId, dao)
+            val viewModel = ViewModelProvider(this, viewModelFactory)
+                .get(EditTaskViewModel::class.java)
+            viewModel.deleteTask()
         }
         fun deleteClicked (taskId : Long) {
-             ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager,
-                 ConfirmDeleteDialogFragment.TAG)
+             ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager, ConfirmDeleteDialogFragment.TAG)
         }
         val adapter = TaskItemAdapter(::taskClicked,::deleteClicked)
 
