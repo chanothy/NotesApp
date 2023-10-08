@@ -24,18 +24,11 @@ class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: 
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.delete_confirmation))
             .setPositiveButton(getString(R.string.yes)) { _,_ -> clickListener(taskId)
-                Log.d("taskId","yeah")
-//                val application = requireNotNull(this.activity).application
-//                val dao = TaskDatabase.getInstance(application).taskDao
-//
-//                val viewModelFactory = EditTaskViewModelFactory(taskId, dao)
-//                val viewModel = ViewModelProvider(this, viewModelFactory)
-//                    .get(EditTaskViewModel::class.java)
-//
-//                Log.d("taskId", taskId.toString())
-//                val tasks = dao.getAll().value
-//                Log.d("AllTasks", tasks.toString())
-//                viewModel.deleteTask()
+                val application = requireNotNull(this.activity).application
+                val dao = TaskDatabase.getInstance(application).taskDao
+                val viewModelFactory = TasksViewModelFactory(dao)
+                val viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
+                viewModel.deleteNote(taskId)
 
             }
             .setNegativeButton(getString(R.string.no)) { _,_ -> }

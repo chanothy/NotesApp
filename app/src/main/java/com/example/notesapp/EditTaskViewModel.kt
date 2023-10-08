@@ -23,6 +23,10 @@ class EditTaskViewModel(taskId: Long, val dao: TaskDao) : ViewModel() {
             _navigateToList.value = true
         }
     }
+
+
+
+
     fun onNavigatedToList() {
         _navigateToList.value = false
     }
