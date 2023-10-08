@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.databinding.TaskItemBinding
 
+/**
+ * communicates between database and viewModel
+ */
+
 class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit,
                       val deleteClickListener: (taskId: Long) -> Unit)
     : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(TaskDiffItemCallback()) {

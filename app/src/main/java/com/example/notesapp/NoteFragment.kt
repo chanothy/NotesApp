@@ -22,6 +22,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class NoteFragment : Fragment() {
+    /**
+     * Note fragment
+     *
+     * Fragment for creating the note.
+     */
     val TAG = "NoteFragment"
     private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
@@ -33,6 +38,7 @@ class NoteFragment : Fragment() {
         }
     }
 
+    // create view
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +54,7 @@ class NoteFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // when button clicked, it adds the new task and moves back to the home screen
         var saveButton = binding.saveButton
         saveButton.setOnClickListener {
             viewModel.addTask()
@@ -65,23 +72,4 @@ class NoteFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NoteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NoteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

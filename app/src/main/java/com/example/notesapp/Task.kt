@@ -4,6 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Schema for the notes database
+ */
+
 @Entity(tableName = "task_table")
 data class Task(
     @PrimaryKey(autoGenerate = true)

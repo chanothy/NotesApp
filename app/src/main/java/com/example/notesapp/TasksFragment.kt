@@ -18,6 +18,11 @@ import com.example.notesapp.databinding.FragmentTasksBinding
  * create an instance of this fragment.
  */
 class TasksFragment : Fragment()   {
+    /**
+     * Serves as home screen
+     *
+     * Has a recycler view that shows all the note items. Also allows for creation of new notes.
+     */
     val TAG = "TasksFragment"
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!

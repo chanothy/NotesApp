@@ -12,6 +12,16 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: Long) -> Unit) : DialogFragment() {
+    /**
+     * Delete Dialog.
+     *
+     * Pop up confirmation for deleting a note item in the UI.
+     * Allows for yes and no options. Yes will delete the note item using the dao.
+     *
+     * @property taskID - ID of item to be deleted
+     * @property clickListener - listens for clicks
+     *
+     */
     val TAG = "ConfirmDeleteDialogFragment"
     interface myClickListener {
         fun yesPressed()
@@ -20,6 +30,12 @@ class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: 
 
 
     var listener: myClickListener? = null
+
+    /**
+     * Creates the dialog box for the yes no box.
+     * Also contains the viewmodel and dao information allowing the viewmodel to delete
+     * a specific item marked with taskID.
+     */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.delete_confirmation))

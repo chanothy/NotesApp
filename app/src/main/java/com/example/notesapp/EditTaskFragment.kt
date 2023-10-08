@@ -18,9 +18,15 @@ import com.example.notesapp.databinding.FragmentEditTaskBinding
  * create an instance of this fragment.
  */
 class EditTaskFragment : Fragment() {
+    /**
+     * Allows for editing of notes. When information is changed, it navigates back to the home screen [tasksFragment]
+     */
     private var _binding: FragmentEditTaskBinding? = null
     private val binding get() = _binding!!
 
+    /**
+     * Creates view and prepares the [viewModel]
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentEditTaskBinding.inflate(inflater, container, false)
@@ -36,7 +42,7 @@ class EditTaskFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-
+        // navigates back to taskFragment on data change.
         viewModel.navigateToList.observe(viewLifecycleOwner, Observer { navigate ->
             if (navigate) {
                 view.findNavController()

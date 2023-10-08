@@ -11,7 +11,11 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
-
+/**
+ * Viewmodel for tasks view
+ *
+ * await function waits for data to exist before continuing on with a function call.
+ */
 suspend fun <T> LiveData<T>.await(): T {
     return withContext(Dispatchers.Main.immediate) {
         suspendCancellableCoroutine { continuation ->
@@ -29,6 +33,9 @@ suspend fun <T> LiveData<T>.await(): T {
     }
 }
 class TasksViewModel(val dao: TaskDao) : ViewModel() {
+    /**
+     * Contains methods of adding and removing tasks.
+     */
     var newTaskName = ""
     var newDescription = ""
     val tasks = dao.getAll()
