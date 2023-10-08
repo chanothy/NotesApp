@@ -46,17 +46,7 @@ class EditTaskFragment : Fragment() {
         })
         return view
     }
-
-//    fun yesPressed() {
-//        val taskId = EditTaskFragmentArgs.fromBundle(requireArguments()).taskId
-//        val application = requireNotNull(this.activity).application
-//        val dao = TaskDatabase.getInstance(application).taskDao
-//
-//        val viewModelFactory = EditTaskViewModelFactory(taskId, dao)
-//        val viewModel = ViewModelProvider(this, viewModelFactory)
-//            .get(EditTaskViewModel::class.java)
-//        viewModel.deleteTask()
-//    }
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

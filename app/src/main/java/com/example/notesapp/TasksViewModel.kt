@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
 
-public suspend fun <T> LiveData<T>.await(): T {
+suspend fun <T> LiveData<T>.await(): T {
     return withContext(Dispatchers.Main.immediate) {
         suspendCancellableCoroutine { continuation ->
             val observer = object : Observer<T> {
