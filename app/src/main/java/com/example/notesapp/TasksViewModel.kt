@@ -86,7 +86,7 @@ class TasksViewModel : ViewModel() {
         val database = Firebase.database
         tasksCollection = database
             .getReference("tasks")
-            .child(auth.currentUser!!.uid)
+//            .child(auth.currentUser!!.uid)
 
 
         tasksCollection.addValueEventListener(object : ValueEventListener {
@@ -149,8 +149,18 @@ class TasksViewModel : ViewModel() {
         _navigateToList.value = true
     }
 
+//    fun addNewTask() {
+//        if (taskId.trim() == "") {
+//            tasksCollection.push().setValue(task.value)
+//        } else {
+//            tasksCollection.child(taskId).setValue(task.value)
+//        }
+//        _navigateToList.value = true
+//    }
+
     fun deleteTask(taskId: String) {
         tasksCollection.child(taskId).removeValue()
+        _navigateToList.value = true
     }
 
     fun onTaskClicked(selectedTask: Task) {

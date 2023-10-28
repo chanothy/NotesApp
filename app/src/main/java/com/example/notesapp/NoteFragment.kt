@@ -55,6 +55,8 @@ class NoteFragment : Fragment() {
         val viewModel : TasksViewModel by activityViewModels()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.taskName.setText("")
+        binding.description.setText("")
 
         // when button clicked, it adds the new task and moves back to the home screen
         var saveButton = binding.saveButton
