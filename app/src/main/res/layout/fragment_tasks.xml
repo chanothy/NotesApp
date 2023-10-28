@@ -27,6 +27,11 @@
 <!--            android:layout_gravity="center"-->
 <!--            android:text="Save Task"-->
 <!--            android:onClick="@{() -> viewModel.addTask()}" />-->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasks_list"

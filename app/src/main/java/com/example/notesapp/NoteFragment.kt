@@ -62,6 +62,8 @@ class NoteFragment : Fragment() {
         var saveButton = binding.saveButton
         saveButton.setOnClickListener {
             viewModel.updateTask()
+            binding.description.setText("")
+            binding.taskName.setText("")
             val action = NoteFragmentDirections.actionNoteFragmentToTasksFragment()
             this.findNavController().navigate(action)
         }
