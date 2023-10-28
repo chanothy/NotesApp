@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.notesapp.EditTaskViewModel" />
+            type="com.example.notesapp.TasksViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,5 +65,12 @@
             android:text="SAVE"
             app:cornerRadius="10dp"
             android:onClick="@{() -> viewModel.updateTask()}"/>
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="10dp"
+            android:text="DELETE"
+            />
     </LinearLayout>
 </layout>

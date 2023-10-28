@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -7,51 +7,33 @@
             name="task"
             type="com.example.notesapp.Task"
             />
-        <variable
-            name="viewModel"
-            type="com.example.notesapp.EditTaskViewModel" />
     </data>
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:layout_margin="5dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="5dp" >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/task_name"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:text="@{task.taskName}"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/description_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{task.description}" />
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/delete_button"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/task_name"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                app:srcCompat="@android:drawable/ic_delete" />
+                android:layout_width="match_parent"
+                android:padding="8dp"
+                android:text="@{task.taskName}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/description_name"
+                android:layout_width="match_parent"
+                android:padding="8dp"
+                android:layout_height="wrap_content"
+                android:text="@{task.description}" />
+
         </LinearLayout>
-
-
-    </LinearLayout>
-
+    </androidx.cardview.widget.CardView>
 </layout>

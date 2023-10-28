@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,18 +47,19 @@ class NoteFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentNoteBinding.inflate(inflater, container, false)
         val view = binding.root
-        val application = requireNotNull(this.activity).application
-        val dao = TaskDatabase.getInstance(application).taskDao
-        val viewModelFactory = TasksViewModelFactory(dao)
-        val viewModel = ViewModelProvider(
-            this, viewModelFactory).get(TasksViewModel::class.java)
+//        val application = requireNotNull(this.activity).application
+//        val dao = TaskDatabase.getInstance(application).taskDao
+//        val viewModelFactory = TasksViewModelFactory(dao)
+//        val viewModel = ViewModelProvider(
+//            this, viewModelFactory).get(TasksViewModel::class.java)
+        val viewModel : TasksViewModel by activityViewModels()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         // when button clicked, it adds the new task and moves back to the home screen
         var saveButton = binding.saveButton
         saveButton.setOnClickListener {
-            viewModel.addTask()
+            viewModel.updateTask()
             val action = NoteFragmentDirections.actionNoteFragmentToTasksFragment()
             this.findNavController().navigate(action)
         }

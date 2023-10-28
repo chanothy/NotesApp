@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.notesapp.databinding.FragmentTasksBinding
 
@@ -31,13 +31,13 @@ class TasksFragment : Fragment()   {
     ): View? {
         _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val view = binding.root
-        val application = requireNotNull(this.activity).application
-        val dao = TaskDatabase.getInstance(application).taskDao
-        val viewModelFactory = TasksViewModelFactory(dao)
-        val viewModel = ViewModelProvider(
-            this, viewModelFactory).get(TasksViewModel::class.java)
+//        val application = requireNotNull(this.activity).application
+//        val dao = TaskDatabase.getInstance(application).taskDao
+//        val viewModelFactory = TasksViewModelFactory(dao)
+        val viewModel : TasksViewModel by activityViewModels()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+//        viewModel.initializeTheDatabaseReference()
 
        /* val adapter = TaskItemAdapter{ taskId ->
             viewModel.onTaskClicked(taskId)
@@ -54,13 +54,13 @@ class TasksFragment : Fragment()   {
         }
 
 
-        fun taskClicked (taskId : Long) {
-            viewModel.onTaskClicked(taskId)
+        fun taskClicked (task : Task) {
+            viewModel.onTaskClicked(task)
         }
-        fun yesPressed(taskId : Long) {
+        fun yesPressed(taskId : String) {
             Log.d(TAG, "in yesPressed(): taskId = $taskId")
         }
-        fun deleteClicked (taskId : Long) {
+        fun deleteClicked (taskId : String) {
              ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager, ConfirmDeleteDialogFragment.TAG)
         }
         val adapter = TaskItemAdapter(::taskClicked,::deleteClicked)
@@ -82,6 +82,13 @@ class TasksFragment : Fragment()   {
                 viewModel.onTaskNavigated()
             }
         })
+        //todo
+//        viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
+//            if(navigate) {
+//                this.findNavController().navigate(R.id.action_tasksFragment_to_signInFragment)
+//                viewModel.onNavigatedToSignIn()
+//            }
+//        })
 
         return view
     }

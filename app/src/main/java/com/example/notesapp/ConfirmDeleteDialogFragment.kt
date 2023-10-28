@@ -7,46 +7,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlin.reflect.KFunction1
 
-class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: Long) -> Unit) : DialogFragment() {
-    /**
-     * Delete Dialog.
-     *
-     * Pop up confirmation for deleting a note item in the UI.
-     * Allows for yes and no options. Yes will delete the note item using the dao.
-     *
-     * @property taskID - ID of item to be deleted
-     * @property clickListener - listens for clicks
-     *
-     */
+class ConfirmDeleteDialogFragment(val taskId : String,val clickListener: (taskId: String) -> Unit) : DialogFragment() {
     val TAG = "ConfirmDeleteDialogFragment"
     interface myClickListener {
         fun yesPressed()
     }
 
-
-
     var listener: myClickListener? = null
-
-    /**
-     * Creates the dialog box for the yes no box.
-     * Also contains the viewmodel and dao information allowing the viewmodel to delete
-     * a specific item marked with taskID.
-     */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.delete_confirmation))
-            .setPositiveButton(getString(R.string.yes)) { _,_ -> clickListener(taskId)
-                val application = requireNotNull(this.activity).application
-                val dao = TaskDatabase.getInstance(application).taskDao
-                val viewModelFactory = TasksViewModelFactory(dao)
-                val viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
-                viewModel.deleteNote(taskId)
-
-            }
+            .setPositiveButton(getString(R.string.yes)) { _,_ -> clickListener(taskId)}
             .setNegativeButton(getString(R.string.no)) { _,_ -> }
 
             .create()
@@ -63,5 +36,8 @@ class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: 
             Log.d(TAG, e.message.toString())
         }
     }
+
+
+
 
 }
