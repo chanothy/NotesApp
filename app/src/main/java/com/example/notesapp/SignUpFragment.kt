@@ -1,4 +1,4 @@
-package edu.iu.habahram.tasks
+package com.example.notesapp
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import edu.iu.habahram.tasks.databinding.FragmentSignUpBinding
+import com.example.notesapp.R
+import com.example.notesapp.TasksViewModel
+import com.example.notesapp.databinding.FragmentSignUpBinding
 
 
 /**

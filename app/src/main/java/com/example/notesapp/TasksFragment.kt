@@ -82,12 +82,12 @@ class TasksFragment : Fragment()   {
             }
         })
         //todo
-//        viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
-//            if(navigate) {
-//                this.findNavController().navigate(R.id.action_tasksFragment_to_signInFragment)
-//                viewModel.onNavigatedToSignIn()
-//            }
-//        })
+        viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
+            if(navigate) {
+                this.findNavController().navigate(R.id.action_tasksFragment_to_signInFragment)
+                viewModel.onNavigatedToSignIn()
+            }
+        })
 
         // Configure the toolbar, set navigation, etc.
         val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)

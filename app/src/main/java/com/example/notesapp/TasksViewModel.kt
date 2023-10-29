@@ -47,7 +47,7 @@ class TasksViewModel : ViewModel() {
     private var auth: FirebaseAuth
 
     var user: User = User()
-//    var verifyPassword = ""
+    var verifyPassword = ""
     var taskId: String = ""
     var task = MutableLiveData<Task>()
     private val _tasks: MutableLiveData<MutableList<Task>> = MutableLiveData()
@@ -82,11 +82,14 @@ class TasksViewModel : ViewModel() {
             task.value = Task()
         }
         _tasks.value = mutableListOf<Task>()
+    }
+
+    fun initializeTheDatabaseReference() {
 
         val database = Firebase.database
         tasksCollection = database
             .getReference("tasks")
-//            .child(auth.currentUser!!.uid)
+            .child(auth.currentUser!!.uid)
 
 
         tasksCollection.addValueEventListener(object : ValueEventListener {
@@ -106,35 +109,8 @@ class TasksViewModel : ViewModel() {
                 // ...
             }
         })
-    }
 
-//    fun initializeTheDatabaseReference() {
-//
-//        val database = Firebase.database
-//        tasksCollection = database
-//            .getReference("tasks")
-//            .child(auth.currentUser!!.uid)
-//
-//
-//        tasksCollection.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                var tasksList: ArrayList<Task> = ArrayList()
-//                for (taskSnapshot in dataSnapshot.children) {
-//                    // TODO: handle the post
-//                    var task = taskSnapshot.getValue<Task>()
-//                    task?.taskId = taskSnapshot.key!!
-//                    tasksList.add(task!!)
-//                }
-//                _tasks.value = tasksList
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                // ...
-//            }
-//        })
-//
-//    }
+    }
 
     fun getAll(): LiveData<List<Task>> {
         return tasks
@@ -191,38 +167,38 @@ class TasksViewModel : ViewModel() {
         _navigateToSignIn.value = false
     }
 
-//    fun signIn() {
-//        if (user.email.isEmpty() || user.password.isEmpty()) {
-//            _errorHappened.value = "Email and password cannot be empty."
-//            return
-//        }
-//        auth.signInWithEmailAndPassword(user.email, user.password).addOnCompleteListener {
-//            if (it.isSuccessful) {
-//                initializeTheDatabaseReference()
-//                _navigateToList.value = true
-//            } else {
-//                _errorHappened.value = it.exception?.message
-//            }
-//        }
-//    }
+    fun signIn() {
+        if (user.email.isEmpty() || user.password.isEmpty()) {
+            _errorHappened.value = "Email and password cannot be empty."
+            return
+        }
+        auth.signInWithEmailAndPassword(user.email, user.password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                initializeTheDatabaseReference()
+                _navigateToList.value = true
+            } else {
+                _errorHappened.value = it.exception?.message
+            }
+        }
+    }
 
-//    fun signUp() {
-//        if (user.email.isEmpty() || user.password.isEmpty()) {
-//            _errorHappened.value = "Email and password cannot be empty."
-//            return
-//        }
-//        if (user.password != verifyPassword) {
-//            _errorHappened.value = "Password and verify do not match."
-//            return
-//        }
-//        auth.createUserWithEmailAndPassword(user.email, user.password).addOnCompleteListener {
-//            if (it.isSuccessful) {
-//                _navigateToSignIn.value = true
-//            } else {
-//                _errorHappened.value = it.exception?.message
-//            }
-//        }
-//    }
+    fun signUp() {
+        if (user.email.isEmpty() || user.password.isEmpty()) {
+            _errorHappened.value = "Email and password cannot be empty."
+            return
+        }
+        if (user.password != verifyPassword) {
+            _errorHappened.value = "Password and verify do not match."
+            return
+        }
+        auth.createUserWithEmailAndPassword(user.email, user.password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                _navigateToSignIn.value = true
+            } else {
+                _errorHappened.value = it.exception?.message
+            }
+        }
+    }
 
     fun signOut() {
         auth.signOut()
@@ -234,39 +210,3 @@ class TasksViewModel : ViewModel() {
         return auth.currentUser
     }
 }
-
-//class TasksViewModel(val dao: TaskDao) : ViewModel() {
-//    /**
-//     * Contains methods of adding and removing tasks.
-//     */
-//
-//    var newTaskName = ""
-//    var newDescription = ""
-//    val tasks = dao.getAll()
-//    private val _navigateToTask = MutableLiveData<Long?>()
-//    val navigateToTask: LiveData<Long?>
-//        get() = _navigateToTask
-//    fun addTask() {
-//        viewModelScope.launch {
-//            val task = Task()
-//            task.taskName = newTaskName
-//            task.description = newDescription
-//            dao.insert(task)
-//        }
-//    }
-//    fun onTaskClicked(taskId: Long) {
-//        _navigateToTask.value = taskId
-//    }
-//    fun onTaskNavigated() {
-//        _navigateToTask.value = null
-//    }
-//
-//    fun deleteNote(noteId: Long)
-//    {
-//        viewModelScope.launch {
-//            val note = dao.get(noteId).await()
-//            dao.delete(note)
-//            _navigateToTask.value = null
-//        }
-//    }
-//}

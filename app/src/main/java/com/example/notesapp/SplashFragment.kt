@@ -1,4 +1,4 @@
-package edu.iu.habahram.tasks
+package com.example.notesapp
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.notesapp.R
+import com.example.notesapp.TasksViewModel
+import com.example.notesapp.databinding.FragmentTasksBinding
 
 
 /**
@@ -17,8 +20,6 @@ import androidx.navigation.fragment.findNavController
  * create an instance of this fragment.
  */
 class SplashFragment : Fragment() {
-
-    val viewModel : TasksViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +36,15 @@ class SplashFragment : Fragment() {
     }
 
     override fun onStart() {
+        val viewModel : TasksViewModel by activityViewModels()
+
         super.onStart()
         val currentUser = viewModel.getCurrentUser()
 
         val handler = Handler(Looper.myLooper()!!)
         handler.postDelayed({
             if (currentUser != null) {
-              this.findNavController().navigate(R.id.action_splashFragment_to_tasksFragment)
+              this.findNavController().navigate(R.id.action_signInFragment_to_tasksFragment)
             }
             else {
                 this.findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
