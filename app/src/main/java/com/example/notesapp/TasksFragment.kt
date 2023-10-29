@@ -5,11 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.notesapp.databinding.FragmentTasksBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 
 /**
@@ -89,6 +94,18 @@ class TasksFragment : Fragment()   {
 //                viewModel.onNavigatedToSignIn()
 //            }
 //        })
+
+        // Configure the toolbar, set navigation, etc.
+        val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
+        val activity = requireActivity() as AppCompatActivity
+        activity.setSupportActionBar(toolbar)
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val navHostFragment =
+            activity.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val builder = AppBarConfiguration.Builder(navController.graph)
+        val appBarConfiguration = builder.build()
+        toolbar.setupWithNavController(navController, appBarConfiguration)
 
         return view
     }
