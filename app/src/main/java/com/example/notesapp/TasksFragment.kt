@@ -85,8 +85,7 @@ class TasksFragment : Fragment()   {
 
         viewModel.navigateToNewTask.observe(viewLifecycleOwner, Observer { taskId ->
             taskId?.let {
-                val action = TasksFragmentDirections
-                    .actionTasksFragmentToNoteFragment()
+                val action = TasksFragmentDirections.actionTasksFragmentToEditTaskFragment(taskId)
                 findNavController().navigate(action)
                 viewModel.onTaskNavigated()
             }
