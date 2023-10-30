@@ -15,9 +15,8 @@ import com.example.notesapp.databinding.FragmentTasksBinding
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [SplashFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Splash fragment that checks if a user is already logged in
+ * before continuing to a sign up or sign in screen.
  */
 class SplashFragment : Fragment() {
 

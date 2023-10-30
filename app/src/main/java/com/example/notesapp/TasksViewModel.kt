@@ -24,7 +24,8 @@ import kotlin.coroutines.resume
 /**
  * Viewmodel for tasks view
  *
- * await function waits for data to exist before continuing on with a function call.
+ * Has methods for instantiating the database and navigation control
+ * Utilizes a system of listeners of live data for navigation.
  */
 suspend fun <T> LiveData<T>.await(): T {
     return withContext(Dispatchers.Main.immediate) {

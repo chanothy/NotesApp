@@ -15,9 +15,7 @@ import com.example.notesapp.databinding.FragmentSignUpBinding
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [SignUpFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Sign up fragment that allows user to sign up.
  */
 class SignUpFragment : Fragment() {
     val TAG = "SignInFragment"

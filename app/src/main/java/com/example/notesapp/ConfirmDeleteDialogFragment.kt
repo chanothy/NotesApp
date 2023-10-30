@@ -9,6 +9,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import kotlin.reflect.KFunction1
 
+/**
+ * Dialog fragment for choosing deletion.
+ */
+
 class ConfirmDeleteDialogFragment(val taskId : String,val clickListener: (taskId: String) -> Unit) : DialogFragment() {
     val TAG = "ConfirmDeleteDialogFragment"
     interface myClickListener {

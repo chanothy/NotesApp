@@ -10,6 +10,9 @@ import androidx.room.PrimaryKey
 
 import com.google.firebase.database.Exclude
 
+/**
+ * Schema for the note item
+ */
 data class Task(
     @get:Exclude
     var taskId: String = "",
@@ -18,14 +21,3 @@ data class Task(
 )
 
 
-//@Entity(tableName = "task_table")
-//data class Task(
-//    @PrimaryKey(autoGenerate = true)
-//    var taskId: Long = 0L,
-//    @ColumnInfo(name = "task_name")
-//    var taskName: String = "",
-//    @ColumnInfo(name = "description")
-//    var description: String = "",
-//    @ColumnInfo(name = "task_done")
-//    var taskDone: Boolean = false
-//)

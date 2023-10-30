@@ -32,6 +32,7 @@ class TasksFragment : Fragment()   {
      * Serves as home screen
      *
      * Has a recycler view that shows all the note items. Also allows for creation of new notes.
+     * Contains system of observers that watch the viewModel live data to determine when to navigate
      */
     val TAG = "TasksFragment"
     private var _binding: FragmentTasksBinding? = null
@@ -47,7 +48,7 @@ class TasksFragment : Fragment()   {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-
+        // initializes instance of database when on this fragment
         viewModel.initializeTheDatabaseReference()
 
         fun taskClicked (task : Task) {
@@ -65,6 +66,7 @@ class TasksFragment : Fragment()   {
         binding.tasksList.adapter = adapter
 
 
+        // system of observers that watch the view model and act upon it
         viewModel.tasks.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
@@ -86,7 +88,7 @@ class TasksFragment : Fragment()   {
             }
         })
 
-        // Configure the toolbar, set navigation, etc.
+        // Sets up the toolbar
         val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
         val activity = requireActivity() as AppCompatActivity
         activity.setSupportActionBar(toolbar)
@@ -94,6 +96,7 @@ class TasksFragment : Fragment()   {
         return view
     }
 
+    // inflates toolbar
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_toolbar, menu)
     }

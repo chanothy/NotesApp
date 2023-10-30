@@ -14,9 +14,7 @@ import com.example.notesapp.TasksViewModel
 import com.example.notesapp.databinding.FragmentSignInBinding
 
 /**
- * A simple [Fragment] subclass.
- * Use the [SignInFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Sign in fragment that allows user to login.
  */
 class SignInFragment : Fragment() {
     val TAG = "SignInFragment"

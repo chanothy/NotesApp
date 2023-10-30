@@ -19,9 +19,7 @@ import com.google.android.material.appbar.MaterialToolbar
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [EditNoteFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Edit note fragment for editing, adding and deleting notes
  */
 class EditNoteFragment : Fragment() {
     private var _binding: FragmentEditTaskBinding? = null
@@ -46,7 +44,7 @@ class EditNoteFragment : Fragment() {
         })
 
 
-        // Configure the toolbar, set navigation, etc.
+        // Sets up the tool bar
         val toolbar: MaterialToolbar = binding.toolbar
         val activity = requireActivity() as AppCompatActivity
         activity.setSupportActionBar(toolbar)
@@ -55,10 +53,12 @@ class EditNoteFragment : Fragment() {
         return view
     }
 
+    // inflates tool bar xml
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.note_toolbar, menu)
     }
 
+    // if yes is pressed then deletes and returns to main page
     fun yesPressed(taskId : String) {
         Log.d("TAG", "in yesPressed(): taskId = $taskId")
         if (taskId != "") {
@@ -68,9 +68,9 @@ class EditNoteFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    // calls the dialog fragment
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val taskId = EditNoteFragmentArgs.fromBundle(requireArguments()).taskId
-
 
         when (item.itemId) {
             R.id.toolbar_delete -> {
@@ -78,7 +78,6 @@ class EditNoteFragment : Fragment() {
                 Log.d("ID", taskId)
                 ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager,
                     ConfirmDeleteDialogFragment.TAG)
-
                 return true
             }
             // Add more cases for additional menu items
