@@ -57,6 +57,10 @@ class TasksViewModel : ViewModel() {
     val navigateToTask: LiveData<String?>
         get() = _navigateToTask
 
+    private val _navigateToNewTask = MutableLiveData<String?>()
+    val navigateToNewTask: LiveData<String?>
+        get() = _navigateToTask
+
     private val _errorHappened = MutableLiveData<String?>()
     val errorHappened: LiveData<String?>
         get() = _errorHappened
@@ -83,9 +87,9 @@ class TasksViewModel : ViewModel() {
         }
         _tasks.value = mutableListOf<Task>()
         val database = Firebase.database
-        tasksCollection = database
-            .getReference("tasks")
-            .child(auth.currentUser!!.uid)
+//        tasksCollection = database
+//            .getReference("tasks")
+//            .child(auth.currentUser!!.uid)
     }
 
     fun initializeTheDatabaseReference() {
@@ -142,13 +146,17 @@ class TasksViewModel : ViewModel() {
     }
 
     fun onNewTaskClicked() {
-        _navigateToTask.value = ""
+        _navigateToNewTask.value = ""
         taskId = ""
         task.value = Task()
     }
 
     fun onTaskNavigated() {
         _navigateToTask.value = null
+    }
+
+    fun onNewTaskNavigated() {
+        _navigateToNewTask.value = null
     }
 
     fun onNavigatedToList() {

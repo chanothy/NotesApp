@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -52,12 +53,14 @@ class TasksFragment : Fragment()   {
             this.findNavController().navigate(action)
         }
 
+        viewModel.initializeTheDatabaseReference()
+
         val logoutButton = binding.logoutButton
         logoutButton.setOnClickListener {
             viewModel.signOut()
         }
 
-        viewModel.initializeTheDatabaseReference()
+
 
         fun taskClicked (task : Task) {
             viewModel.onTaskClicked(task)
@@ -80,15 +83,15 @@ class TasksFragment : Fragment()   {
             }
         })
 
-        viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId ->
+        viewModel.navigateToNewTask.observe(viewLifecycleOwner, Observer { taskId ->
             taskId?.let {
                 val action = TasksFragmentDirections
-                    .actionTasksFragmentToEditTaskFragment(taskId)
+                    .actionTasksFragmentToNoteFragment()
                 findNavController().navigate(action)
                 viewModel.onTaskNavigated()
             }
         })
-        //todo
+
         viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
             if(navigate) {
                 this.findNavController().navigate(R.id.action_tasksFragment_to_signInFragment)
@@ -100,13 +103,34 @@ class TasksFragment : Fragment()   {
         val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
         val activity = requireActivity() as AppCompatActivity
         activity.setSupportActionBar(toolbar)
-
+        setHasOptionsMenu(true)
         return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_toolbar, menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val viewModel : TasksViewModel by activityViewModels()
+        when (item.itemId) {
+            R.id.add -> {
+                // Handle Item 1 click
+                val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
+                this.findNavController().navigate(action)
+                Log.d("add","button clicked")
+                return true
+            }
+            R.id.login -> {
+                // Handle Item 2 click
+                return true
+            }
+            // Add more cases for additional menu items
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+
 
 
     override fun onDestroyView() {
