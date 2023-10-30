@@ -133,10 +133,8 @@ class TasksViewModel : ViewModel() {
         _navigateToList.value = true
     }
 
-
     fun deleteTask(taskId: String) {
         tasksCollection.child(taskId).removeValue()
-        _navigateToList.value = true
     }
 
     fun onTaskClicked(selectedTask: Task) {
@@ -146,17 +144,13 @@ class TasksViewModel : ViewModel() {
     }
 
     fun onNewTaskClicked() {
-        _navigateToNewTask.value = ""
+        _navigateToTask.value = ""
         taskId = ""
         task.value = Task()
     }
 
     fun onTaskNavigated() {
         _navigateToTask.value = null
-    }
-
-    fun onNewTaskNavigated() {
-        _navigateToNewTask.value = null
     }
 
     fun onNavigatedToList() {

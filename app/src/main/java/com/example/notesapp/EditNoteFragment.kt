@@ -1,14 +1,21 @@
 package com.example.notesapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.notesapp.databinding.FragmentEditTaskBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 
 /**
@@ -38,12 +45,40 @@ class EditNoteFragment : Fragment() {
             }
         })
 
-        binding.deleteButton.setOnClickListener {
-            viewModel.deleteTask(taskId)
-        }
+
+        // Configure the toolbar, set navigation, etc.
+        val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
+        val activity = requireActivity() as AppCompatActivity
+        activity.setSupportActionBar(toolbar)
+        setHasOptionsMenu(true)
 
         return view
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.note_toolbar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val viewModel : TasksViewModel by activityViewModels()
+        val taskId = EditNoteFragmentArgs.fromBundle(requireArguments()).taskId
+
+        when (item.itemId) {
+            R.id.toolbar_delete -> {
+                // Handle Item 1 click
+                Log.d("ID", taskId)
+                if (taskId != "") {
+                    binding.viewModel?.deleteTask(taskId)
+                }
+                val action = EditNoteFragmentDirections.actionEditTaskFragmentToTasksFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            // Add more cases for additional menu items
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

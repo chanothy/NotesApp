@@ -47,20 +47,8 @@ class TasksFragment : Fragment()   {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val addNoteButton = binding.addNoteButton
-        addNoteButton.setOnClickListener {
-            val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
-            this.findNavController().navigate(action)
-        }
 
         viewModel.initializeTheDatabaseReference()
-
-        val logoutButton = binding.logoutButton
-        logoutButton.setOnClickListener {
-            viewModel.signOut()
-        }
-
-
 
         fun taskClicked (task : Task) {
             viewModel.onTaskClicked(task)
@@ -83,14 +71,14 @@ class TasksFragment : Fragment()   {
             }
         })
 
-        viewModel.navigateToNewTask.observe(viewLifecycleOwner, Observer { taskId ->
+        viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId ->
             taskId?.let {
-                val action = TasksFragmentDirections.actionTasksFragmentToEditTaskFragment(taskId)
-                findNavController().navigate(action)
+                val action = TasksFragmentDirections
+                    .actionTasksFragmentToEditTaskFragment(taskId)
+                this.findNavController().navigate(action)
                 viewModel.onTaskNavigated()
             }
         })
-
         viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer { navigate ->
             if(navigate) {
                 this.findNavController().navigate(R.id.action_tasksFragment_to_signInFragment)
@@ -111,17 +99,19 @@ class TasksFragment : Fragment()   {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val viewModel : TasksViewModel by activityViewModels()
+
+        val viewModel : TasksViewModel by activityViewModels()
+
         when (item.itemId) {
             R.id.add -> {
                 // Handle Item 1 click
-                val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
-                this.findNavController().navigate(action)
+                viewModel.onNewTaskClicked()
                 Log.d("add","button clicked")
                 return true
             }
             R.id.login -> {
                 // Handle Item 2 click
+                viewModel.signOut()
                 return true
             }
             // Add more cases for additional menu items

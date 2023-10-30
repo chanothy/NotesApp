@@ -43,19 +43,5 @@
             app:spanCount="2"
         />
 
-        <Button
-            android:id="@+id/add_note_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cornerRadius="10dp"
-            android:text="ADD NOTE" />
-
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cornerRadius="10dp"
-            android:text="LOG OUT" />
-
     </LinearLayout>
 </layout>
