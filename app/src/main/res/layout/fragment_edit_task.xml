@@ -21,59 +21,40 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
-        <EditText
-            android:id="@+id/task_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:hint="Note Title"
-            android:text="@={viewModel.task.taskName}" />
-<!--        <CheckBox-->
-<!--            android:id="@+id/task_done"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="16sp"-->
-<!--            android:checked="@={viewModel.task.taskDone}" />-->
-<!--        <Button-->
-<!--            android:id="@+id/update_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="Update Task"-->
-<!--            android:onClick="@{() -> viewModel.updateTask()}" />-->
-<!--        <Button-->
-<!--            android:id="@+id/delete_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="Delete Task"-->
-<!--            android:onClick="@{() -> viewModel.deleteTask()}" />-->
-<!--        <EditText-->
-<!--            android:id="@+id/task_name"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Title"-->
-<!--            android:inputType="text"-->
-<!--            android:text="@={viewModel.newTaskName}" />-->
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextText"
-            android:layout_width="match_parent"
-            android:ems="10"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:hint="Description"
-            android:text="@={viewModel.task.description}"/>
+            <EditText
+                android:id="@+id/task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Note Title"
+                android:inputType="text"
+                android:text="@={viewModel.task.taskName}"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="SAVE"
-            app:cornerRadius="10dp"
-            android:onClick="@{() -> viewModel.updateTask()}"/>
+            <EditText
+                android:id="@+id/editTextText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Description"
+                android:inputType="text"
+                android:text="@={viewModel.task.description}" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:onClick="@{() -> viewModel.updateTask()}"
+                android:text="SAVE"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

@@ -17,7 +17,7 @@ class TaskItemAdapter(val clickListener: (task: Task) -> Unit,
             : TaskItemViewHolder = TaskItemViewHolder.inflateFrom(parent)
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, clickListener, deleteClickListener)
+        holder.bind(item, clickListener)
     }
 
     class TaskItemViewHolder(val binding: TaskItemBinding)
@@ -31,8 +31,8 @@ class TaskItemAdapter(val clickListener: (task: Task) -> Unit,
             }
         }
 
-        fun bind(item: Task, clickListener: (task: Task) -> Unit,
-                 deleteClickListener: (taskId: String) -> Unit) {
+        fun bind(item: Task, clickListener: (task: Task) -> Unit)
+        {
             binding.task = item
             binding.root.setOnClickListener { clickListener(item) }
         }

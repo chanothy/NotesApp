@@ -86,10 +86,6 @@ class TasksViewModel : ViewModel() {
             task.value = Task()
         }
         _tasks.value = mutableListOf<Task>()
-        val database = Firebase.database
-//        tasksCollection = database
-//            .getReference("tasks")
-//            .child(auth.currentUser!!.uid)
     }
 
     fun initializeTheDatabaseReference() {
