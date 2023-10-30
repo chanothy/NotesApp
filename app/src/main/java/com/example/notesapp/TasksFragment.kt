@@ -46,11 +46,18 @@ class TasksFragment : Fragment()   {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-//        val addNoteButton = binding.addNoteButton
-//        addNoteButton.setOnClickListener {
-//            val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
-//            this.findNavController().navigate(action)
-//        }
+        val addNoteButton = binding.addNoteButton
+        addNoteButton.setOnClickListener {
+            val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
+            this.findNavController().navigate(action)
+        }
+
+        val logoutButton = binding.logoutButton
+        logoutButton.setOnClickListener {
+            viewModel.signOut()
+        }
+
+        viewModel.initializeTheDatabaseReference()
 
         fun taskClicked (task : Task) {
             viewModel.onTaskClicked(task)
@@ -95,6 +102,10 @@ class TasksFragment : Fragment()   {
         activity.setSupportActionBar(toolbar)
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_toolbar, menu)
     }
 
 

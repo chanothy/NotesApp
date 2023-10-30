@@ -25,30 +25,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.menu_toolbar, menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
     /*
        Navigate to a destination when an item is clicked.
     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        when (item.itemId) {
-            R.id.add -> {
-                // Handle Item 1 click
-                val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
-                navController.navigate(action)
-                return true
-            }
-            R.id.login -> {
-                // Handle Item 2 click
-
-                return true
-            }
-            // Add more cases for additional menu items
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val navController = findNavController(R.id.nav_host_fragment)
+//        when (item.itemId) {
+//            R.id.add -> {
+//                // Handle Item 1 click
+//                val action = TasksFragmentDirections.actionTasksFragmentToNoteFragment()
+//                navController.navigate(action)
+//                return true
+//            }
+//            R.id.login -> {
+//                // Handle Item 2 click
+//
+//                return true
+//            }
+//            // Add more cases for additional menu items
+//            else -> return super.onOptionsItemSelected(item)
+//        }
+//    }
 }

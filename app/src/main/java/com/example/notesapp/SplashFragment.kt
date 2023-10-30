@@ -44,7 +44,8 @@ class SplashFragment : Fragment() {
         val handler = Handler(Looper.myLooper()!!)
         handler.postDelayed({
             if (currentUser != null) {
-              this.findNavController().navigate(R.id.action_signInFragment_to_tasksFragment)
+                val action = SplashFragmentDirections.actionSplashFragmentToTasksFragment()
+                this.findNavController().navigate(action)
             }
             else {
                 this.findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
