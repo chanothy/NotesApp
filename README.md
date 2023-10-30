@@ -6,31 +6,34 @@ Notes app that allows for adding, editing and deleting of notes and their descri
 
 The following **required** functionality is completed:
 
-* [ ] User sees UI for adding, removing, editing notes.
+* [ ] User sees UI for adding, removing, and editing notes.
 * [ ] User can add notes.
 * [ ] User can edit notes.
 * [ ] User can remove notes.
-* [ ] Notes are stored in a database.
+* [ ] Notes are stored in a Firebase realtime database.
+* [ ] Users can login and see their own notes only through Firebase authentication.
+* [ ] Has dialog confirmation for removing notes.
+* [ ] Prompts user to sign up.
+* [ ] Contains splash screen.
 
 The following **extensions** are implemented:
 
 * implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 * implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-* implementation ("androidx.room:room-runtime:$room_version")
-* implementation ("androidx.room:room-ktx:$room_version")
-* ksp("androidx.room:room-compiler:2.4.1")
+* Google Firebase
+* Safeargs
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/chanothy/NotesApp/blob/master/notesAppDemo.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
+<img src='https://github.com/chanothy/NotesApp/blob/master/notesApp.AuthDBDemo.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-There was an issue with the delete button. It was related to how the database getting worked. The value is not immediately available so you need to delay any actions on it until it is available. This happend with delete because, getting a value from the dao was slow, so I needed to await() until it was available for deletion.
+I had a lot of issues trying to get the add and edit functionality to work. They would work independently, but once I chained them together, I got a fragment navigation error. It was also difficult trying to get the toolbars to work because they were hard to understand. I spent a lot of time connecting the Firebase database.
 
 ## License
 
